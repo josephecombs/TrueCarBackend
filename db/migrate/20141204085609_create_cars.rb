@@ -10,8 +10,7 @@ class CreateCars < ActiveRecord::Migration
 
       t.timestamps
     end
-    
-    add_index :cars, :car_id
+
     add_index :cars, :serial_number_pattern
   end
 end
