@@ -1,7 +1,12 @@
 class CarsController < ApplicationController
   
   def index
-    @cars = Car.all
+    if params[:serial_number_pattern]
+      @cars = Car.regexed_search(params[:serial_number_pattern])
+      # @cars = [Car.first, Car.last]
+    else
+      @cars = Car.all
+    end
     render :index
   end
   
