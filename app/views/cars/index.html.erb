@@ -1,7 +1,21 @@
 <h1>hi world from index view</h1>
+
+<form action="cars" method="get" accept-charset="utf-8">
+  <label for="car_serial_number_pattern">Serial Number:</label>
+  
+  <% if @cars.length > 0 %>
+	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" value="">
+  <% elsif params[:serial_number_pattern].length > 0 %>
+  	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" value="<%=  params[:serial_number_pattern].to_s %>">
+  <% else %>
+  	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" value="">
+  <% end %>
+  <input type="submit" value="Search!">
+</form>
+
 <ul>
 	<% @cars.each do |car| %>
-		<li><%= car.id %>, <%= car.trim_name%>, <%= car.serial_number_pattern %></li>
+		<li><%= car.id %>, <%= car.trim_name%>, <%= car.serial_number_pattern %>, <%= car.year %>, <%= car.make %></li>
 	<% end %>
 </ul>
 
