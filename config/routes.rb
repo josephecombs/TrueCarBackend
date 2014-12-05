@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: redirect("/search")
+  root to: redirect("/cars")
   
   resources :cars, only: [:index, :show, :create, :update, :destroy]
 end
