@@ -7,7 +7,7 @@ class Car < ActiveRecord::Base
   
   def self.regexed_search (string)
     query_term = ""
-
+    
     string.each_char do |char|
       query_term += '[' + char.downcase + '|\*]'
     end
