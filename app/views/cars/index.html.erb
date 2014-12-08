@@ -14,48 +14,26 @@
 </form>
 
 <div id="results">
-  <button class="sort" data-sort="description">
+  <button class="sort" data-sort="trim_name">
     Sort by description
   </button>
-  <ul class="list">
-    <% @cars.each do |car| %>
-	  <li><%= car.id %>, <%= car.trim_name%>, <%= car.serial_number_pattern %>, <%= car.year %>, <%= car.make %>
-	
-	  </li>
-    <% end %>
-  </ul>
-</div>
-
-<div id="users">
-  <input class="search" placeholder="Search" />
-  <button class="sort" data-sort="name">
-    Sort by name
+  <button class="sort" data-sort="serial_number_pattern">
+    Sort by SNP
   </button>
-
-  <ul class="list">
-    <li>
-      <h3 class="name">Jonny Stromberg</h3>
-      <p class="born">1986</p>
-    </li>
-    <li>
-      <h3 class="name">Jonas Arnklint</h3>
-      <p class="born">1985</p>
-    </li>
-    <li>
-      <h3 class="name">Martina Elm</h3>
-      <p class="born">1986</p>
-    </li>
-    <li>
-      <h3 class="name">Gustaf Lindqvist</h3>
-      <p class="born">1983</p>
-    </li>
-  </ul>
+  <table>
+    <tbody class="list">
+	    <tr>
+	      <th>Description</th>
+	      <th>Serial Number Pattern</th> 
+	      <th>Year</th>
+	    </tr>
+      <% @cars.each do |car| %>
+	    <tr>
+		    <td class='trim_name'><%= car.trim_name%></td>
+		    <td class='serial_number_pattern'><%= car.serial_number_pattern %></td>
+			<td class='year'><%= car.year %></td>
+	    </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-<script>
-	var options = {
-	  valueNames: [ 'name', 'born' ]
-	};
-
-	var userList = new List('users', options);
-</script>
-<script src="assets/list.js"></script>
