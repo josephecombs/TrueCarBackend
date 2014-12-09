@@ -50,12 +50,13 @@ $(document).ready(function() {
     });
 	
 	var regexCheckInput = function (string) {
-		console.log("hi world!!");
+		console.log('checking');
+		console.log($('#car_serial_number_pattern').val())
+		
 	};
 	
 	$('#car_serial_number_pattern').change(function() {
 		regexCheckInput();
-
 	});
 });
 </script>

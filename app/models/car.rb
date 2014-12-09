@@ -6,7 +6,7 @@ class Car < ActiveRecord::Base
   #TODO: has_many ... previous_owners? transactions?
   
   def self.regexed_search (string)
-    
+    #TODO: this is a little long
     #this checking is really only needed for times when the user is directly typing in params to url bar
     pure_string = string.gsub(/[^a-zA-Z0-9 ]/,"")
     puts "1"
