@@ -99,7 +99,16 @@ th.header {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
 .arrow.top:after {
   bottom: -20px;
   top: auto;
+}
+
+.incorrect-input {
+  border-color: red;
+}
+
+.correct-input {
+  border-color: green;
 }

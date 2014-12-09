@@ -6,9 +6,10 @@
   <% elsif defined? params[:serial_number_pattern].length %>
 	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" title="Serial Number must be a 12-digit string of six letters followed by six numbers. Ex: XXRCAV123456" value="">
   <% else %>
+	<!-- base case, on new page load -->
   	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" title="Serial Number must be a 12-digit string of six letters followed by six numbers. Ex: XXRCAV123456" value="">
   <% end %>
-  <input type="submit" value="Search!">
+  <input type="submit" class="search-button" value="Search!">
 </form>
 
 
@@ -50,13 +51,43 @@ $(document).ready(function() {
     });
 	
 	var regexCheckInput = function (string) {
-		console.log('checking');
-		console.log($('#car_serial_number_pattern').val())
+		//returns a bool to check if a given string is a correctly formatted serial number
+		//use same logic as a in class method
+		pure_string = string.replace(/[^a-zA-Z0-9]/,"");
+		if(pure_string.length === string.length) {
+			if (pure_string.length === 12) {
+				left_six = pure_string.substring(0,6);
+				temp_six = left_six.replace(/[^a-zA-Z]/,"");
+				if (temp_six.length === 6) {
+					right_six = pure_string.substring(6,12);
+					temp_six = right_six.replace(/[^0-9]/,"");
+					if (temp_six.length === 6) {
+						return true;
+					}
+				}
+			}
+		}
 		
+		return false;
 	};
 	
+	//set the search button to disabled to begin
+	$(".search-button").prop("disabled", true);
+	
 	$('#car_serial_number_pattern').change(function() {
-		regexCheckInput();
+		if (regexCheckInput($('#car_serial_number_pattern').val())) {
+			//good Serial Number, make the field border green and enable the submit button
+			$("#car_serial_number_pattern").removeClass("incorrect-input");
+			$("#car_serial_number_pattern").addClass("correct-input");
+			$(".search-button").prop("disabled", false);
+			console.log("correct input");
+		} else {
+			//bad Serial number, make the field border red and leave the submit button disabled
+			console.log("incorrect input");
+			$("#car_serial_number_pattern").removeClass("correct-input");
+			$("#car_serial_number_pattern").addClass("incorrect-input");
+			$(".search-button").prop("disabled", true);
+		}
 	});
 });
 </script>
