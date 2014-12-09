@@ -55,6 +55,9 @@ $(document).ready(function() {
       $( document ).tooltip({track: 'true'});
     });
 	
+	//focus the cursor in search field by default
+	$("#car_serial_number_pattern").focus();
+	
 	var regexCheckInput = function (string) {
 		//returns a bool to check if a given string is a correctly formatted serial number
 		//use same logic as a in class method
@@ -79,8 +82,25 @@ $(document).ready(function() {
 	//set the search button to disabled to begin
 	$(".search-button").prop("disabled", true);
 	
+	// var processRegexCheckInput = function () {
+	// 	if (regexCheckInput($('#car_serial_number_pattern').val())) {
+	// 		//good Serial Number, make the field border green and enable the submit button
+	// 		$("#car_serial_number_pattern").removeClass("incorrect-input");
+	// 		$("#car_serial_number_pattern").addClass("correct-input");
+	// 		$(".search-button").prop("disabled", false);
+	// 		console.log("correct input");
+	// 	} else {
+	// 		//bad Serial number, make the field border red and leave the submit button disabled
+	// 		console.log("incorrect input");
+	// 		$("#car_serial_number_pattern").removeClass("correct-input");
+	// 		$("#car_serial_number_pattern").addClass("incorrect-input");
+	// 		$(".search-button").prop("disabled", true);
+	// 	}
+	// }
+	
 	//this is always checking to see if the user has or has not entered correct input
-	$('#car_serial_number_pattern').change(function() {
+	// $('#car_serial_number_pattern').keyup(processRegexCheckInput);
+	$('#car_serial_number_pattern').bind("keyup change", function() {
 		if (regexCheckInput($('#car_serial_number_pattern').val())) {
 			//good Serial Number, make the field border green and enable the submit button
 			$("#car_serial_number_pattern").removeClass("incorrect-input");

@@ -113,16 +113,36 @@ th.header {
   border-color: green;
 }
 
-.footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 15px;
-    width: 100%;
-	font-family: arial;
-}
-
 .no-results-message {
 	font-weight: bold;
 	color: red;
+}
+
+/*this stupid log element was introduced in jquery 1.11.x, so this is my hack to hide it*/
+.ui-helper-hidden-accessible{
+    display: none;
+}
+
+/*.wrapper {
+	min-height: 100%;
+	height: auto important!;
+	height: 100%;
+	margin: 0 auto -155px; 
+}*/
+
+.footer {
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    width:100%;
+    background:#999;
+	height: 12px;
+	text-align: right;
+	font-family: arial;
+	font-size: 12px;
+}
+
+.text-muted {
+	margin: 0px;
+	padding-right: 4px;
 }
