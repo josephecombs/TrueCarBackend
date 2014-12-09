@@ -112,3 +112,17 @@ th.header {
 .correct-input {
   border-color: green;
 }
+
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 15px;
+    width: 100%;
+	font-family: arial;
+}
+
+.no-results-message {
+	font-weight: bold;
+	color: red;
+}

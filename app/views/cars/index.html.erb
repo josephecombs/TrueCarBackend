@@ -1,15 +1,20 @@
+<!-- TODO: split a lot of this up into partials-->
+
 <form action="cars" method="get" accept-charset="utf-8">
   <label for="car_serial_number_pattern">Serial Number:</label>
 
   <% if @cars.length > 0 %>
 	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" title="Serial Number must be a 12-digit string of six letters followed by six numbers. Ex: XXRCAV123456" value="">
+	<input type="submit" class="search-button" value="Search!">
   <% elsif defined? params[:serial_number_pattern].length %>
-	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" title="Serial Number must be a 12-digit string of six letters followed by six numbers. Ex: XXRCAV123456" value="">
+  	<!-- search has been made, but no results returned. -->
+	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" title="Serial Number must be a 12-digit string of six letters followed by six numbers. Ex: XXRCAV123456" value="<%= params[:serial_number_pattern] %>">
+	<input type="submit" class="search-button" value="Search!"><span class="no-results-message"> NO RESULTS RETURNED :(</span>
   <% else %>
 	<!-- base case, on new page load -->
   	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" title="Serial Number must be a 12-digit string of six letters followed by six numbers. Ex: XXRCAV123456" value="">
+	<input type="submit" class="search-button" value="Search!">
   <% end %>
-  <input type="submit" class="search-button" value="Search!">
 </form>
 
 
@@ -44,7 +49,7 @@ $(document).ready(function() {
         // sort on the first column and third column, order asc 
 		// turned this line off because tooltip was failing with no rows in the table
         // sortList: [[0,0],[2,0]] 
-    }); 
+    });
 	
     $(function() {
       $( document ).tooltip({track: 'true'});
@@ -74,6 +79,7 @@ $(document).ready(function() {
 	//set the search button to disabled to begin
 	$(".search-button").prop("disabled", true);
 	
+	//this is always checking to see if the user has or has not entered correct input
 	$('#car_serial_number_pattern').change(function() {
 		if (regexCheckInput($('#car_serial_number_pattern').val())) {
 			//good Serial Number, make the field border green and enable the submit button
