@@ -1,39 +1,54 @@
-<h1>hi world from index view</h1>
-
 <form action="cars" method="get" accept-charset="utf-8">
   <label for="car_serial_number_pattern">Serial Number:</label>
-  
+
   <% if @cars.length > 0 %>
-	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" value="">
-  <% elsif params[:serial_number_pattern].length > 0 %>
-  	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" value="<%=  params[:serial_number_pattern].to_s %>">
+	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" title="Serial Number must be a 12-digit string of six letters followed by six numbers. Ex: XXRCAV123456" value="">
+  <% elsif defined? params[:serial_number_pattern].length %>
+	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" title="Serial Number must be a 12-digit string of six letters followed by six numbers. Ex: XXRCAV123456" value="">
   <% else %>
-  	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" value="">
+  	<input type="text" name="serial_number_pattern" id="car_serial_number_pattern" title="Serial Number must be a 12-digit string of six letters followed by six numbers. Ex: XXRCAV123456" value="">
   <% end %>
   <input type="submit" value="Search!">
 </form>
 
-<div id="results">
-  <button class="sort" data-sort="trim_name">
-    Sort by description
-  </button>
-  <button class="sort" data-sort="serial_number_pattern">
-    Sort by SNP
-  </button>
-  <table>
-    <tbody class="list">
+
+<table id='results' class='tablesorter'>
+	<thead>
+	  <tr>
+		<th>Trim ID</th>
+	    <th>Description</th>
+	    <th>Serial Number Pattern</th> 
+	    <th>Year</th>
+	    <th>Make</th>
+	    <th>Model</th>		
+	  </tr> 
+	</thead>
+	<tbody>
+	  <% @cars.each do |car| %>
 	    <tr>
-	      <th>Description</th>
-	      <th>Serial Number Pattern</th> 
-	      <th>Year</th>
-	    </tr>
-      <% @cars.each do |car| %>
-	    <tr>
+			<td class='trim_id'><%= car.trim_id%></td>
 		    <td class='trim_name'><%= car.trim_name%></td>
 		    <td class='serial_number_pattern'><%= car.serial_number_pattern %></td>
 			<td class='year'><%= car.year %></td>
+			<td class='make'><%= car.make %></td>
+			<td class='model'><%= car.model %></td>
 	    </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+	  <% end %>
+	</tbody>
+</table>
+<script type='text/javascript'>
+$(document).ready(function() { 
+    // call the tablesorter plugin 
+    $("#results").tablesorter({ 
+        // sort on the first column and third column, order asc 
+		// turned this line off because tooltip was failing with no rows in the table
+        // sortList: [[0,0],[2,0]] 
+    }); 
+	
+    $(function() {
+      $( document ).tooltip({track: 'true'});
+    });
+	
+	$('#car_serial_number_pattern').change(function() { console.log("hi world") });
+}); 
+</script
