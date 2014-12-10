@@ -16,6 +16,7 @@ gem 'rails_12factor'
 gem 'bootstrap-sass'
 gem 'lol_dba'
 gem 'utf8-cleaner'
+gem 'sprockets-rails'
 
 group :development do
   gem 'pry-rails'
