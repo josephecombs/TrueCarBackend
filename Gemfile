@@ -29,7 +29,3 @@ group :development, :test do
   gem 'launchy'
   gem 'rspec-rails'
 end
-
-group :production  do
-  gem 'rails_12factor'
-end
